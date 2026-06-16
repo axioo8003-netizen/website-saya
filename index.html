@@ -1,934 +1,563 @@
-<link rel="preload" as="image" href="images/e770c37f3532070736b3223f7b97c882.webp">
-<link rel="preload" as="image" href="images/2.webp">
-<link rel="preload" as="image" href="images/3.webp">
 
-<!-- meta viewport = memberi instruksi ke browser agar tampilan menyesuaikan layar HP / laptop -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="id">
 
-<!-- body = semua isi website yang terlihat oleh user -->
-<body style="background-image: url('Background/jonatan-pie-3l3RwQdHRHg-unsplash.jpg');">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div style="cursor:default; width:360px; margin:10px auto; padding:12px; border-radius:10px; font-weight:bold; color:White; text-align:center; font-size:50px;">
-    Mau Cari Model<br>
-    Baju Apa nih?
-</div>
+    <title>Mau Cari Model Baju Apa Nih?</title>
 
-<!-- SEARCH FITUR = kotak pencarian untuk mencari semua item -->
-<div style="text-align:center; margin-top:15px;">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
 
-    <div style="width:360px; margin:10px auto; padding:12px; background:#ffffff; border-radius:10px; text-align:center;">
+            background-image: url("Background/jonatan-pie-3l3RwQdHRHg-unsplash.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-    <input 
-        type="text"
-        id="searchBox"
-        placeholder="isi kodenya disini yaa..."
-        onkeyup="searchAll()"
-        style="
-            width:100%;
-            padding:10px;
-            border-radius:8px;
-            border:none;
-            outline:none;
-            text-align:center;
-        "
-    >
+            color: white;
 
-</div>
+            min-height: 100vh;
 
-<!-- SEARCH RESULT AREA -->
-<div id="searchResult" style="display:none; text-align:center; margin-top:20px; color:white;">
-</div>
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-<!-- MENU UTAMA = tampilan awal kategori A sampai I -->
-<div id="home" style="text-align:center; margin-top:30px;">
+            padding: 15px;
+            box-sizing: border-box;
+        }
 
-    <!-- onclick = saat diklik, buka halaman kategori A -->
-    <div onclick="showPage('A')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        A. Kaos / T-Shirt
+        .page {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            margin-top: 10px;
+            white-space: pre-line;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+
+            padding: 12px;
+            font-size: 16px;
+
+            border: none;
+            border-radius: 8px;
+
+            margin-top: 10px;
+        }
+
+        .grid {
+            width: 100%;
+            max-width: 500px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .box {
+            background: rgba(0, 0, 0, 0.6);
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            cursor: pointer;
+        }
+
+        .box:active {
+            transform: scale(0.98);
+        }
+
+        button {
+            margin-top: 15px;
+
+            padding: 10px 15px;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+.box img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HOME -->
+
+    <div id="home" class="page active">
+
+        <h1>
+Mau Cari
+Model
+Baju Apa Nih?
+        </h1>
+
+        <input
+    type="text"
+    id="searchHome"
+    placeholder="Cari model baju..."
+    oninput="searchHome()">
+        
+        <div class="grid" id="homeSearchResult"></div>
+        <div class="grid">
+
+            <div class="box" onclick="openPage('kaos')">
+                A. KAOS / T-SHIRT
+            </div>
+
+            <div class="box" onclick="openPage('polo')">
+                B. POLO & HENLEY
+            </div>
+
+            <div class="box" onclick="openPage('kemeja')">
+                C. KEMEJA / SHIRT
+            </div>
+
+            <div class="box" onclick="openPage('hoodie')">
+                D. HOODIE & SWEATSHIRT
+            </div>
+
+            <div class="box" onclick="openPage('sweater')">
+                E. SWEATER & RAJUT
+            </div>
+
+            <div class="box" onclick="openPage('sleeveless')">
+                F. TANPA LENGAN / SLEEVELESS
+            </div>
+
+            <div class="box" onclick="openPage('gym')">
+                G. GYM / SPORT
+            </div>
+
+            <div class="box" onclick="openPage('outer')">
+                H. OUTERWEAR
+            </div>
+
+            <div class="box" onclick="openPage('street')">
+                I. STREETWEAR
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- kategori B -->
-    <div onclick="showPage('B')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        B. Polo & Henley
+    <!-- HALAMAN KAOS -->
+
+    <div id="kaos" class="page">
+
+        <h1>A. KAOS / T-SHIRT</h1>
+
+        <input
+    type="text"
+    id="searchKaos"
+    placeholder="Cari Kaos..."
+    oninput="filterList('searchKaos','kaosContainer',kaosList)">
+
+        <div class="grid" id="kaosContainer"></div>
+
+        <button onclick="backHome()">
+            Kembali
+        </button>
+
     </div>
 
-    <!-- kategori C -->
-    <div onclick="showPage('C')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        C. Kemeja / Shirt<br> 
-(Casual - Formal - Premium)
+<!-- HALAMAN LAIN -->
+
+    <div id="polo" class="page">
+
+        <h1>B. POLO & HENLEY</h1>
+
+        <input type="text" placeholder="Cari Polo...">
+
+        <div class="grid" id="poloContainer"></div>
+
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori D -->
-    <div onclick="showPage('D')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        D. Hoodie & Sweatshirt
+<!-- HALAMAN LAIN -->
+
+
+    <div id="kemeja" class="page">
+        <h1>C. KEMEJA / SHIRT</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori E -->
-    <div onclick="showPage('E')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        E. Sweater & Rajut
+<!-- HALAMAN LAIN -->
+
+
+    <div id="hoodie" class="page">
+        <h1>D. HOODIE & SWEATSHIRT</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori F -->
-    <div onclick="showPage('F')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        F. Tanpa Lengan / Sleeveless
+<!-- HALAMAN LAIN -->
+
+
+    <div id="sweater" class="page">
+        <h1>E. SWEATER & RAJUT</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori G -->
-    <div onclick="showPage('G')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        G. Gym / Sport / Performance<br> 
-(Advanced)
+<!-- HALAMAN LAIN -->
+
+
+    <div id="sleeveless" class="page">
+        <h1>F. SLEEVELESS</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori H -->
-    <div onclick="showPage('H')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        H. Outerwear Ringan / Jaket Atasan
+<!-- HALAMAN LAIN -->
+
+
+    <div id="gym" class="page">
+        <h1>G. GYM / SPORT</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- kategori I -->
-    <div onclick="showPage('I')" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#a8e6a1; border-radius:10px; font-weight:bold; color:black;">
-        I. Streetwear / Fashion Modern / Nishi
+<!-- HALAMAN LAIN -->
+
+
+    <div id="outer" class="page">
+        <h1>H. OUTERWEAR</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-</div>
+<!-- HALAMAN LAIN -->
 
-<!-- PAGE A = halaman isi kategori A -->
-<div id="pageA" style="display:none; text-align:center; color:white; margin-top:20px;">
 
-    <!-- tombol kembali = kembali ke menu utama -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
+    <div id="street" class="page">
+        <h1>I. STREETWEAR</h1>
+        <button onclick="backHome()">Kembali</button>
     </div>
 
-    <!-- judul kategori A -->
-    <h2>A. Kaos / T-Shirt</h2>
+<!-- HALAMAN LAIN -->
 
-    <!-- setiap div di bawah = item produk, bisa diklik -->
-    <!-- onclick klik = memberi aksi popup pilihan user -->
+<div id="produkPage" class="page">
 
-  <div onclick="klikProduk('A1', [
-    {
-        kode: 'A10',
-        nama: 'Kaos polos',
-        gambar: 'images/e770c37f3532070736b3223f7b97c882.webp',
-        link: 'https://s.shopee.co.id/7VE5MHMISG'
-    },
-    {
-        kode: 'A11',
-        nama: 'Kaos oversize',
-        gambar: 'images/2.webp',
-        link: '#'
-    },
-    {
-        kode: 'A12',
-        nama: 'Kaos premium',
-        gambar: 'images/3.webp',
-        link: '#'
-    }
-])"
-style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
+    <h1 id="judulProduk"></h1>
 
-    A1. Kaos polos (Plain T-Shirt)
+    <div class="grid" id="produkContainer"></div>
 
-</div>
-
-    <div onclick="klik('Slim Fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A2. Kaos slim fit (Slim Fit T-Shirt)
-    </div>
-
-    <div onclick="klik('Regular Fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A3. Kaos regular fit (Regular Fit T-Shirt)
-    </div>
-
-    <div onclick="klik('Oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A4. Kaos oversize (Oversize T-Shirt)
-    </div>
-
-    <div onclick="klik('Boxy')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A5. Kaos boxy (Boxy Fit T-Shirt)
-    </div>
-
-    <div onclick="klik('Longline')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A6. Kaos longline (Longline T-Shirt)
-    </div>
-
-    <div onclick="klik('Cropped')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A7. Kaos cropped (Cropped T-Shirt)
-    </div>
-
-    <div onclick="klik('Raglan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A8. Kaos raglan (Raglan T-Shirt)
-    </div>
-
-    <div onclick="klik('Striped')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A9. Kaos bergaris (Striped T-Shirt)
-    </div>
-
-    <div onclick="klik('Graphic')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA1. Kaos grafis (Graphic T-Shirt)
-    </div>
-
-    <div onclick="klik('Vintage')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA2. Kaos vintage wash
-    </div>
-
-    <div onclick="klik('Tie Dye')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA3. Kaos tie dye
-    </div>
-
-    <div onclick="klik('Acid Wash')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA4. Kaos acid wash
-    </div>
-
-    <div onclick="klik('Distressed')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA5. Kaos distressed
-    </div>
-
-    <div onclick="klik('Mesh')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA6. Kaos mesh
-    </div>
-
-    <div onclick="klik('Layered')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA7. Kaos layered
-    </div>
-
-    <div onclick="klik('Double Layer')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA8. Kaos dua lapis
-    </div>
-
-    <div onclick="klik('Pocket')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AA9. Kaos pocket
-    </div>
-
-    <div onclick="klik('Long Sleeve')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AAA1. Kaos lengan panjang
-    </div>
-
-    <div onclick="klik('Street Oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        AAA2. Kaos streetwear oversize
-    </div>
-
-</div>
-
-<!-- PAGE B = halaman isi kategori B -->
-<div id="pageB" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali = kembali ke menu utama -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <!-- judul kategori B -->
-    <h2>B. Polo & Henley</h2>
-
-    <div onclick="klik('Polo polos')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B1. Polo polos (Plain Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo slim fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B2. Polo slim fit (Slim Fit Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B3. Polo oversize (Oversize Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo rajut')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B4. Polo rajut (Knitted Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo lengan panjang')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B5. Polo lengan panjang (Long Sleeve Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo olahraga')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B6. Polo olahraga (Sport Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo premium')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B7. Polo premium (Premium Polo Shirt)
-    </div>
-
-    <div onclick="klik('Polo minimalis')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B8. Polo minimalis (Minimal Polo Shirt)
-    </div>
-
-    <div onclick="klik('Henley pendek')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B9. Henley pendek (Short Sleeve Henley)
-    </div>
-
-    <div onclick="klik('Henley panjang')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        B10. Henley panjang (Long Sleeve Henley)
-    </div>
-
-    <div onclick="klik('Henley slim fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        BB1. Henley slim fit (Slim Henley)
-    </div>
-
-    <div onclick="klik('Henley oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        BB2. Henley oversize (Oversize Henley)
-    </div>
-
-</div>
-
-<!-- PAGE C = halaman isi kategori C -->
-<div id="pageC" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali = kembali ke menu utama -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <!-- judul kategori C -->
-    <h2>C. Kemeja / Shirt (Casual – Formal – Premium)</h2>
-
-    <div onclick="klik('Kemeja formal')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C1. Kemeja formal (Formal Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja slim fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C2. Kemeja slim fit (Slim Fit Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja regular fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C3. Kemeja regular fit (Regular Fit Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja oxford')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C4. Kemeja oxford (Oxford Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja flanel')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C5. Kemeja flanel (Flannel Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja denim')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C6. Kemeja denim (Denim Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja linen')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C7. Kemeja linen (Linen Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja satin formal')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C8. Kemeja satin formal (Satin Dress Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja tuxedo')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        C9. Kemeja tuxedo (Tuxedo Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja lengan pendek')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC1. Kemeja lengan pendek (Short Sleeve Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja motif')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC2. Kemeja motif (Pattern Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja kotak')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC3. Kemeja kotak (Check Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja garis')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC4. Kemeja garis (Striped Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja camp collar')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC5. Kemeja camp collar (Camp Collar Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja workwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC6. Kemeja workwear (Work Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja mandarin')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC7. Kemeja mandarin (Mandarin Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja overshirt ringan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC8. Kemeja overshirt ringan (Light Overshirt)
-    </div>
-
-    <div onclick="klik('Kemeja overshirt tebal')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CC9. Kemeja overshirt tebal (Heavy Overshirt)
-    </div>
-
-    <div onclick="klik('Kemeja tactical')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CCC1. Kemeja tactical (Tactical Shirt)
-    </div>
-
-    <div onclick="klik('Kemeja industrial')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        CCC2. Kemeja industrial (Industrial Shirt)
-    </div>
+    <button onclick="backHome()">
+        Kembali
+    </button>
 
 </div>
-<!-- PAGE D = halaman isi kategori D -->
-<div id="pageD" style="display:none; text-align:center; color:white; margin-top:20px;">
+    
 
-    <!-- tombol kembali = kembali ke menu utama -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <!-- judul kategori D -->
-    <h2>D. Hoodie & Sweatshirt</h2>
-
-    <div onclick="klik('Hoodie pullover')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D1. Hoodie pullover (Pullover Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie zipper')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D2. Hoodie zipper (Zip Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D3. Hoodie oversize (Oversize Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie slim fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D4. Hoodie slim fit (Slim Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie cropped')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D5. Hoodie cropped (Cropped Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie streetwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D6. Hoodie streetwear (Street Hoodie)
-    </div>
-
-    <div onclick="klik('Hoodie tanpa lengan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D7. Hoodie tanpa lengan (Sleeveless Hoodie)
-    </div>
-
-    <div onclick="klik('Sweatshirt crewneck')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D8. Sweatshirt crewneck (Crewneck Sweatshirt)
-    </div>
-
-    <div onclick="klik('Sweatshirt oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        D9. Sweatshirt oversize (Oversize Sweatshirt)
-    </div>
-
-    <div onclick="klik('Sweatshirt grafis')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        DD1. Sweatshirt grafis (Graphic Sweatshirt)
-    </div>
-
-    <div onclick="klik('Sweatshirt half zip')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        DD2. Sweatshirt half zip (Half Zip Sweatshirt)
-    </div>
-
-    <div onclick="klik('Sweatshirt ringan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        DD3. Sweatshirt ringan (Light Sweatshirt)
-    </div>
-
-</div>
-<!-- PAGE E = halaman isi kategori E -->
-<div id="pageE" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali = kembali ke menu utama -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <!-- judul kategori E -->
-    <h2>E. Sweater & Rajut</h2>
-
-    <div onclick="klik('Sweater crewneck')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E1. Sweater crewneck (Crewneck Sweater)
-    </div>
-
-    <div onclick="klik('Sweater v-neck')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E2. Sweater v-neck (V-Neck Sweater)
-    </div>
-
-    <div onclick="klik('Sweater turtleneck')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E3. Sweater turtleneck (Turtleneck Sweater)
-    </div>
-
-    <div onclick="klik('Sweater rajut kabel')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E4. Sweater rajut kabel (Cable Knit Sweater)
-    </div>
-
-    <div onclick="klik('Sweater rajut tipis')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E5. Sweater rajut tipis (Light Knit Sweater)
-    </div>
-
-    <div onclick="klik('Sweater oversize')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E6. Sweater oversize (Oversize Sweater)
-    </div>
-
-    <div onclick="klik('Cardigan kancing')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E7. Cardigan kancing (Button Cardigan)
-    </div>
-
-    <div onclick="klik('Cardigan zipper')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E8. Cardigan zipper (Zip Cardigan)
-    </div>
-
-    <div onclick="klik('Cardigan panjang')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        E9. Cardigan panjang (Long Cardigan)
-    </div>
-
-    <div onclick="klik('Polo rajut')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        EE1. Polo rajut (Knitted Polo)
-    </div>
-
-    <div onclick="klik('Sweater vest')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        EE2. Sweater vest (Knit Vest Top)
-    </div>
-
-</div><!-- PAGE F = halaman isi kategori F -->
-<div id="pageF" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <h2>F. Tanpa Lengan / Sleeveless</h2>
-
-    <div onclick="klik('Kaos tanpa lengan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F1. Kaos tanpa lengan (Sleeveless T-Shirt)
-    </div>
-
-    <div onclick="klik('Tank top polos')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F2. Tank top polos (Plain Tank Top)
-    </div>
-
-    <div onclick="klik('Tank top gym')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F3. Tank top gym (Gym Tank Top)
-    </div>
-
-    <div onclick="klik('Tank top rib')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F4. Tank top rib (Ribbed Tank Top)
-    </div>
-
-    <div onclick="klik('Tank top longline')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F5. Tank top longline (Longline Tank Top)
-    </div>
-
-    <div onclick="klik('Kaos gym singlet')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F6. Kaos gym singlet (Gym Singlet)
-    </div>
-
-    <div onclick="klik('Kaos gym stringer')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F7. Kaos gym stringer (Gym Stringer)
-    </div>
-
-    <div onclick="klik('Kaos gym racerback')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F8. Kaos gym racerback (Racerback Tank)
-    </div>
-
-    <div onclick="klik('Muscle shirt')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        F9. Muscle shirt (Muscle Shirt)
-    </div>
-
-    <div onclick="klik('Tank top streetwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        FF1. Tank top streetwear (Street Tank Top)
-    </div>
-
-</div><!-- PAGE G = halaman isi kategori G -->
-<div id="pageG" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <h2>G. Gym / Sport / Performance (Advanced)</h2>
-
-    <div onclick="klik('Kaos gym dry-fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G1. Kaos gym dry-fit (Gym Dry-Fit Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym kompresi')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G2. Kaos gym kompresi (Gym Compression Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym seamless')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G3. Kaos gym seamless (Seamless Gym Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym breathable')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G4. Kaos gym breathable (Breathable Gym Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym mesh')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G5. Kaos gym mesh (Mesh Gym Performance Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym training')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G6. Kaos gym training (Gym Training Shirt)
-    </div>
-
-    <div onclick="klik('Kaos gym lengan panjang')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G7. Kaos gym lengan panjang (Long Sleeve Gym Shirt)
-    </div>
-
-    <div onclick="klik('Base layer gym')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G8. Base layer gym (Gym Base Layer Top)
-    </div>
-
-    <div onclick="klik('Compression long sleeve pro')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        G9. Compression long sleeve pro (Pro Compression Top)
-    </div>
-
-    <div onclick="klik('Atasan running')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG1. Atasan running (Running Top)
-    </div>
-
-    <div onclick="klik('Jersey olahraga')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG2. Jersey olahraga (Sport Jersey)
-    </div>
-
-    <div onclick="klik('Jersey sepak bola')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG3. Jersey sepak bola (Football Jersey)
-    </div>
-
-    <div onclick="klik('Jersey basket')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG4. Jersey basket (Basketball Jersey)
-    </div>
-
-    <div onclick="klik('Jersey sepeda')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG5. Jersey sepeda (Cycling Jersey)
-    </div>
-
-    <div onclick="klik('Polo sport performance')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        GG6. Polo sport performance (Performance Polo)
-    </div>
-
-</div><!-- PAGE H = halaman isi kategori H -->
-<div id="pageH" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <h2>H. Outerwear Ringan / Jaket Atasan</h2>
-
-    <div onclick="klik('Jaket bomber')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H1. Jaket bomber (Bomber Jacket)
-    </div>
-
-    <div onclick="klik('Jaket denim')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H2. Jaket denim (Denim Jacket)
-    </div>
-
-    <div onclick="klik('Jaket varsity')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H3. Jaket varsity (Varsity Jacket)
-    </div>
-
-    <div onclick="klik('Jaket coach')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H4. Jaket coach (Coach Jacket)
-    </div>
-
-    <div onclick="klik('Jaket windbreaker')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H5. Jaket windbreaker (Windbreaker Jacket)
-    </div>
-
-    <div onclick="klik('Jaket shacket')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H6. Jaket shacket (Shirt Jacket)
-    </div>
-
-    <div onclick="klik('Jaket lapangan')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H7. Jaket lapangan (Field Jacket)
-    </div>
-
-    <div onclick="klik('Jaket kerja')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H8. Jaket kerja (Work Jacket)
-    </div>
-
-    <div onclick="klik('Jaket harrington')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        H9. Jaket harrington (Harrington Jacket)
-    </div>
-
-    <div onclick="klik('Jaket utilitas')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        HH1. Jaket utilitas (Utility Jacket)
-    </div>
-
-    <div onclick="klik('Jaket streetwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        HH2. Jaket streetwear (Street Jacket)
-    </div>
-
-    <div onclick="klik('Vest outdoor')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        HH3. Vest outdoor (Outdoor Vest)
-    </div>
-
-    <div onclick="klik('Vest utilitas')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        HH4. Vest utilitas (Utility Vest)
-    </div>
-
-    <div onclick="klik('Gilet techwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        HH5. Gilet techwear (Techwear Gilet)
-    </div>
-
-</div><!-- PAGE I = halaman isi kategori I -->
-<div id="pageI" style="display:none; text-align:center; color:white; margin-top:20px;">
-
-    <!-- tombol kembali -->
-    <div onclick="backHome()" style="cursor:pointer; width:360px; margin:10px auto; padding:12px; background:#ffcc66; border-radius:10px; font-weight:bold; color:black;">
-        ⬅ Kembali
-    </div>
-
-    <h2>I. Streetwear / Fashion Modern / Nishi</h2>
-
-    <div onclick="klik('Kaos boxy cropped')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I1. Kaos boxy cropped (Boxy Cropped Tee)
-    </div>
-
-    <div onclick="klik('Kaos sheer')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I2. Kaos sheer (Sheer T-Shirt)
-    </div>
-
-    <div onclick="klik('Kaos techwear')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I3. Kaos techwear (Techwear T-Shirt)
-    </div>
-
-    <div onclick="klik('Kaos avant-garde')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I4. Kaos avant-garde (Avant-Garde Tee)
-    </div>
-
-    <div onclick="klik('Atasan kimono pria')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I5. Atasan kimono pria (Kimono Top)
-    </div>
-
-    <div onclick="klik('Atasan tunik pria')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I6. Atasan tunik pria (Men Tunic Top)
-    </div>
-
-    <div onclick="klik('Kaftan modern pria')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I7. Kaftan modern pria (Modern Kaftan)
-    </div>
-
-    <div onclick="klik('Blazer casual')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I8. Blazer casual (Casual Blazer)
-    </div>
-
-    <div onclick="klik('Blazer formal')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        I9. Blazer formal (Formal Blazer)
-    </div>
-
-    <div onclick="klik('Rompi formal')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        II1. Rompi formal (Formal Vest)
-    </div>
-
-    <div onclick="klik('Rompi rajut')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        II2. Rompi rajut (Knit Vest)
-    </div>
-
-    <div onclick="klik('Atasan deconstructed')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        II3. Atasan deconstructed (Deconstructed Top)
-    </div>
-
-    <div onclick="klik('Atasan layered fashion')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        II4. Atasan layered fashion (Layered Fashion Top)
-    </div>
-
-</div>
-
-<!-- PAGE I selesai -->
-
-<!-- DETAIL PRODUK (WAJIB ADA DI SINI) -->
-<div id="detailBox" style="display:none; text-align:center; margin-top:20px;"></div>
-
-<!-- SCRIPT NAVIGASI -->
 <script>
 
-/* =========================================================
-   FIX TAMBAHAN (TIDAK MENGHAPUS KODE LAMA)
-   ========================================================= */
+        function openPage(id) {
 
-/* DATABASE UNTUK SEARCH (BIAR A10 LANGSUNG MUNCUL) */
-var produkDB = [
-    {
-        kode: "A10",
-        nama: "Kaos polos",
-        gambar: "images/e770c37f3532070736b3223f7b97c882.webp",
-        link: "https://s.shopee.co.id/7VE5MHMISG"
-    },
-    {
-        kode: "A11",
-        nama: "Kaos oversize",
-        gambar: "images/2.webp",
-        link: "#"
-    },
-    {
-        kode: "A12",
-        nama: "Kaos premium",
-        gambar: "images/3.webp",
-        link: "#"
-    }
+            document
+                .querySelectorAll('.page')
+                .forEach(page => page.classList.remove('active'));
+
+            document
+                .getElementById(id)
+                .classList.add('active');
+
+        }
+
+        function backHome() {
+
+            document
+                .querySelectorAll('.page')
+                .forEach(page => page.classList.remove('active'));
+
+            document
+                .getElementById('home')
+                .classList.add('active');
+
+        }
+
+        const kaosList = [
+
+            "Kaos polos (Plain T-Shirt)",
+            "Kaos slim fit (Slim Fit T-Shirt)",
+            "Kaos regular fit (Regular Fit T-Shirt)",
+            "Kaos oversize (Oversize T-Shirt)",
+            "Kaos boxy (Boxy Fit T-Shirt)",
+            "Kaos longline (Longline T-Shirt)",
+            "Kaos cropped (Cropped T-Shirt)",
+            "Kaos raglan (Raglan T-Shirt)",
+            "Kaos bergaris (Striped T-Shirt)",
+            "Kaos grafis (Graphic T-Shirt)",
+            "Kaos vintage wash (Vintage Wash T-Shirt)",
+            "Kaos tie dye (Tie Dye T-Shirt)",
+            "Kaos acid wash (Acid Wash T-Shirt)",
+            "Kaos distressed (Distressed T-Shirt)",
+            "Kaos mesh (Mesh T-Shirt)",
+            "Kaos layered (Layered T-Shirt)",
+            "Kaos dua lapis (Double Layer T-Shirt)",
+            "Kaos pocket (Pocket T-Shirt)",
+            "Kaos lengan panjang (Long Sleeve T-Shirt)",
+            "Kaos streetwear oversize (Street Oversize Tee)"
+
+        ];
+
+        const pololist = [
+    "Polo polos (Plain Polo Shirt)",
+    "Polo slim fit (Slim Fit Polo Shirt)",
+    "Polo oversize (Oversize Polo Shirt)",
+    "Polo rajut (Knitted Polo Shirt)",
+    "Polo lengan panjang (Long Sleeve Polo Shirt)",
+    "Polo olahraga (Sport Polo Shirt)",
+    "Polo premium (Premium Polo Shirt)",
+    "Polo minimalis (Minimal Polo Shirt)",
+    "Henley pendek (Short Sleeve Henley)",
+    "Henley panjang (Long Sleeve Henley)",
+    "Henley slim fit (Slim Henley)",
+    "Henley oversize (Oversize Henley)"
 ];
 
-/* FIX klik BIAR TIDAK ERROR */
-function klik(nama) {
-    console.log("Klik produk:", nama);
-}
 
-/* =========================================================
-   NAVIGASI (TETAP PUNYA KAMU)
-   ========================================================= */
+        const semuaKategori = [
+    ...kaosList,
+    ...pololist
+];
 
-function searchAll() {
-    // ambil input user dan ubah ke huruf kecil
-    let input = document.getElementById("searchBox").value.toLowerCase();
 
-    let home = document.getElementById("home");
-    let resultBox = document.getElementById("searchResult");
+        function loadKaos() {
 
-    // kalau kosong → reset tampilan
-    if (input.trim() === "") {
-        home.style.display = "block";
-        resultBox.style.display = "none";
-        resultBox.innerHTML = "";
-        return;
-    }
+            const container =
+                document.getElementById("kaosContainer");
 
-    // sembunyikan home saat search aktif
-    home.style.display = "none";
-    resultBox.style.display = "block";
+            container.innerHTML = "";
 
-    // reset hasil
-    resultBox.innerHTML = "";
+            kaosList.forEach(item => {
 
-    // cari dari DATABASE (bukan DOM)
-    produkDB.forEach(function(item) {
+                const box =
+                    document.createElement("div");
 
-        // gabungkan kode + nama agar bisa dicari
-        let kode = item.kode.toLowerCase();
-        let nama = item.nama.toLowerCase();
+                box.className = "box";
 
-        if (kode.includes(input) || nama.includes(input)) {
+                box.innerText = item;
 
-            resultBox.innerHTML += `
-                <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
+                box.onclick = () => {
+   		 openProdukPage(item);
+			};
 
-                    <img src="${item.gambar}"
-                         onclick="window.open('${item.link}')"
-                         style="width:100%;cursor:pointer;">
+                container.appendChild(box);
 
-                    <div onclick="window.open('${item.link}')"
-                         style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
-                        ${item.kode}. ${item.nama}
-                    </div>
+            });
 
-                </div>
-            `;
         }
-    });
-}
 
-function showPage(page) {
-    document.getElementById("home").style.display = "none";
+         function loadPolo() {
 
-    let pages = ["A","B","C","D","E","F","G","H","I"];
+            const container =
+                document.getElementById("poloContainer");
 
-    pages.forEach(p => {
-        let el = document.getElementById("page" + p);
-        if (el) el.style.display = "none";
-    });
+            container.innerHTML = "";
 
-    document.getElementById("page" + page).style.display = "block";
-}
+            pololist.forEach(item => {
 
-function backHome() {
-    let pages = ["A","B","C","D","E","F","G","H","I"];
+                const box =
+                    document.createElement("div");
 
-    pages.forEach(p => {
-        let el = document.getElementById("page" + p);
-        if (el) el.style.display = "none";
-    });
+                box.className = "box";
 
-    document.getElementById("home").style.display = "block";
-}
+                box.innerText = item;
 
-function klikProduk(folder, listProduk) {
+                box.onclick = () => {
+   		 openProdukPage(item);
+					};
 
-    document.getElementById("home").style.display = "none";
+                container.appendChild(box);
 
-    let pages = ["A","B","C","D","E","F","G","H","I"];
-    pages.forEach(p => {
-        let el = document.getElementById("page" + p);
-        if (el) el.style.display = "none";
-    });
+            });
 
-    let detail = document.getElementById("detailBox");
-    detail.style.display = "block";
-
-    // tombol kembali + isi produk
-    let html = `
-        <div onclick="backHome()" 
-             style="width:360px;margin:10px auto;padding:10px;background:#ffcc66;text-align:center;border-radius:10px;cursor:pointer;">
-            ⬅ Kembali
-        </div>
-    `;
-
-    listProduk.forEach(item => {
-        html += `
-        <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
-            <img src="${item.gambar}" 
-                 onclick="if('${item.link}') window.open('${item.link}')"
-                 style="width:100%;cursor:pointer;">
-
-            <div onclick="if('${item.link}') window.open('${item.link}')"
-                 style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
-                ${item.kode}. ${item.nama}
-            </div>
-        </div>`;
-    });
-
-    detail.innerHTML = html;
-}
-
-function searchAll() {
-    // ambil input user dan ubah ke huruf kecil
-    let input = document.getElementById("searchBox").value.toLowerCase();
-
-    let home = document.getElementById("home");
-    let resultBox = document.getElementById("searchResult");
-
-    // kalau kosong → reset tampilan
-    if (input.trim() === "") {
-        home.style.display = "block";
-        resultBox.style.display = "none";
-        resultBox.innerHTML = "";
-        return;
-    }
-
-    // sembunyikan home saat search aktif
-    home.style.display = "none";
-    resultBox.style.display = "block";
-
-    // reset hasil
-    resultBox.innerHTML = "";
-
-    // cari dari DATABASE (bukan DOM)
-    produkDB.forEach(function(item) {
-
-        // gabungkan kode + nama agar bisa dicari
-        let kode = item.kode.toLowerCase();
-        let nama = item.nama.toLowerCase();
-
-        if (kode.includes(input) || nama.includes(input)) {
-
-            resultBox.innerHTML += `
-                <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
-
-                    <img src="${item.gambar}"
-                         onclick="window.open('${item.link}')"
-                         style="width:100%;cursor:pointer;">
-
-                    <div onclick="window.open('${item.link}')"
-                         style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
-                        ${item.kode}. ${item.nama}
-                    </div>
-
-                </div>
-            `;
         }
+     
+
+loadKaos();
+
+loadPolo();
+
+   
+function openProdukPage(kategori) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById("produkPage")
+        .classList.add("active");
+
+    document.getElementById("judulProduk")
+        .textContent = kategori;
+
+    const container =
+        document.getElementById("produkContainer");
+
+    container.innerHTML = "";
+
+    produkKaos[kategori].forEach(produk => {
+
+        const box = document.createElement("div");
+
+        box.className = "box";
+
+        box.innerHTML = `
+            <img src="${produk.gambar}" width="150">
+            <h3>${produk.nama}</h3>
+        `;
+
+        box.onclick = () => {
+            window.open(produk.link, "_blank");
+        };
+
+        container.appendChild(box);
     });
 }
 
-</script>
+const produkKaos = {
+
+            "Kaos polos (Plain T-Shirt)": [
+        {
+            nama: "A10 Kaos Polos Putih",
+            gambar:"images/e770c37f3532070736b3223f7b97c882.webp",
+            link: "https://s.shopee.co.id/7VE5MHMISG"
+        }
+    ]
+};
+
+
+function filterList(inputId, containerId, dataList) {
+
+    const keyword =
+        document.getElementById(inputId)
+        .value
+        .toLowerCase();
+
+    const container =
+        document.getElementById(containerId);
+
+    container.innerHTML = "";
+
+    dataList.forEach(item => {
+
+        if (item.toLowerCase().includes(keyword)) {
+
+            const box = document.createElement("div");
+
+            box.className = "box";
+            box.innerText = item;
+
+            box.onclick = () => {
+                openProdukPage(item);
+            };
+
+            container.appendChild(box);
+        }
+
+    });
+
+}
+
+
+function searchHome() {
+
+    const keyword =
+        document.getElementById("searchHome")
+        .value
+        .toLowerCase();
+
+    const container =
+        document.getElementById("homeSearchResult");
+
+    container.innerHTML = "";
+
+    if (!keyword) return;
+
+    const products = getAllProducts();
+
+    products.forEach(product => {
+
+        if (
+            product.nama
+            .toLowerCase()
+            .includes(keyword)
+        ) {
+
+            const box =
+                document.createElement("div");
+
+            box.className = "box";
+
+            box.innerHTML = `
+                <img src="${product.gambar}">
+                <p>${product.nama}</p>
+            `;
+
+            box.onclick = () => {
+
+                window.open(
+                    product.link,
+                    "_blank"
+                );
+
+            };
+
+            container.appendChild(box);
+
+        }
+
+    });
+
+}
+
+function getAllProducts() {
+
+    const products = [];
+
+    Object.values(produkKaos).forEach(list => {
+
+        list.forEach(product => {
+
+            products.push(product);
+
+        });
+
+    });
+
+    return products;
+
+}
+
+ </script>
+
 </body>
+
