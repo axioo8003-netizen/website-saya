@@ -1,3 +1,7 @@
+<link rel="preload" as="image" href="images/e770c37f3532070736b3223f7b97c882.webp">
+<link rel="preload" as="image" href="images/2.webp">
+<link rel="preload" as="image" href="images/3.webp">
+
 <!-- meta viewport = memberi instruksi ke browser agar tampilan menyesuaikan layar HP / laptop -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -101,19 +105,18 @@
     <!-- setiap div di bawah = item produk, bisa diklik -->
     <!-- onclick klik = memberi aksi popup pilihan user -->
 
-   <div onclick="klikProduk('A1', [
+  <div onclick="klikProduk('A1', [
     {
         kode: 'A10',
         nama: 'Kaos polos',
         gambar: 'images/e770c37f3532070736b3223f7b97c882.webp',
         link: 'https://s.shopee.co.id/7VE5MHMISG'
-
     },
     {
         kode: 'A11',
         nama: 'Kaos oversize',
         gambar: 'images/2.webp',
-        link:'#'
+        link: '#'
     },
     {
         kode: 'A12',
@@ -731,6 +734,91 @@ style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-r
 
 <!-- SCRIPT NAVIGASI -->
 <script>
+
+/* =========================================================
+   FIX TAMBAHAN (TIDAK MENGHAPUS KODE LAMA)
+   ========================================================= */
+
+/* DATABASE UNTUK SEARCH (BIAR A10 LANGSUNG MUNCUL) */
+var produkDB = [
+    {
+        kode: "A10",
+        nama: "Kaos polos",
+        gambar: "images/e770c37f3532070736b3223f7b97c882.webp",
+        link: "https://s.shopee.co.id/7VE5MHMISG"
+    },
+    {
+        kode: "A11",
+        nama: "Kaos oversize",
+        gambar: "images/2.webp",
+        link: "#"
+    },
+    {
+        kode: "A12",
+        nama: "Kaos premium",
+        gambar: "images/3.webp",
+        link: "#"
+    }
+];
+
+/* FIX klik BIAR TIDAK ERROR */
+function klik(nama) {
+    console.log("Klik produk:", nama);
+}
+
+/* =========================================================
+   NAVIGASI (TETAP PUNYA KAMU)
+   ========================================================= */
+
+function searchAll() {
+    // ambil input user dan ubah ke huruf kecil
+    let input = document.getElementById("searchBox").value.toLowerCase();
+
+    let home = document.getElementById("home");
+    let resultBox = document.getElementById("searchResult");
+
+    // kalau kosong → reset tampilan
+    if (input.trim() === "") {
+        home.style.display = "block";
+        resultBox.style.display = "none";
+        resultBox.innerHTML = "";
+        return;
+    }
+
+    // sembunyikan home saat search aktif
+    home.style.display = "none";
+    resultBox.style.display = "block";
+
+    // reset hasil
+    resultBox.innerHTML = "";
+
+    // cari dari DATABASE (bukan DOM)
+    produkDB.forEach(function(item) {
+
+        // gabungkan kode + nama agar bisa dicari
+        let kode = item.kode.toLowerCase();
+        let nama = item.nama.toLowerCase();
+
+        if (kode.includes(input) || nama.includes(input)) {
+
+            resultBox.innerHTML += `
+                <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
+
+                    <img src="${item.gambar}"
+                         onclick="window.open('${item.link}')"
+                         style="width:100%;cursor:pointer;">
+
+                    <div onclick="window.open('${item.link}')"
+                         style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
+                        ${item.kode}. ${item.nama}
+                    </div>
+
+                </div>
+            `;
+        }
+    });
+}
+
 function showPage(page) {
     document.getElementById("home").style.display = "none";
 
@@ -794,48 +882,53 @@ function klikProduk(folder, listProduk) {
 }
 
 function searchAll() {
+    // ambil input user dan ubah ke huruf kecil
     let input = document.getElementById("searchBox").value.toLowerCase();
 
     let home = document.getElementById("home");
-    let pages = ["pageA","pageB","pageC","pageD","pageE","pageF","pageG","pageH","pageI"];
     let resultBox = document.getElementById("searchResult");
 
-    // kalau kosong → balik normal
+    // kalau kosong → reset tampilan
     if (input.trim() === "") {
         home.style.display = "block";
         resultBox.style.display = "none";
-
-        pages.forEach(id => {
-            let el = document.getElementById(id);
-            if (el) el.style.display = "none";
-        });
-
+        resultBox.innerHTML = "";
         return;
     }
 
-    // sembunyikan semua page + home
+    // sembunyikan home saat search aktif
     home.style.display = "none";
-    pages.forEach(id => {
-        let el = document.getElementById(id);
-        if (el) el.style.display = "none";
-    });
-
-    // cari semua item klik di halaman
-    let items = document.querySelectorAll("div[onclick^='klik']");
-
-    resultBox.innerHTML = "";
     resultBox.style.display = "block";
 
-    items.forEach(function(el) {
-        let text = el.innerText.toLowerCase();
+    // reset hasil
+    resultBox.innerHTML = "";
 
-        if (text.includes(input)) {
-            let clone = el.cloneNode(true);
-            resultBox.appendChild(clone);
+    // cari dari DATABASE (bukan DOM)
+    produkDB.forEach(function(item) {
+
+        // gabungkan kode + nama agar bisa dicari
+        let kode = item.kode.toLowerCase();
+        let nama = item.nama.toLowerCase();
+
+        if (kode.includes(input) || nama.includes(input)) {
+
+            resultBox.innerHTML += `
+                <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
+
+                    <img src="${item.gambar}"
+                         onclick="window.open('${item.link}')"
+                         style="width:100%;cursor:pointer;">
+
+                    <div onclick="window.open('${item.link}')"
+                         style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
+                        ${item.kode}. ${item.nama}
+                    </div>
+
+                </div>
+            `;
         }
     });
 }
-
 
 </script>
 </body>
