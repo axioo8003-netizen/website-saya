@@ -101,9 +101,32 @@
     <!-- setiap div di bawah = item produk, bisa diklik -->
     <!-- onclick klik = memberi aksi popup pilihan user -->
 
-    <div onclick="klik('Kaos polos')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
-        A1. Kaos polos (Plain T-Shirt)
-    </div>
+   <div onclick="klikProduk('A1', [
+    {
+        kode: 'A10',
+        nama: 'Kaos polos',
+        gambar: 'images/e770c37f3532070736b3223f7b97c882.webp',
+        link: 'https://s.shopee.co.id/7VE5MHMISG'
+
+    },
+    {
+        kode: 'A11',
+        nama: 'Kaos oversize',
+        gambar: 'images/2.webp',
+        link:'#'
+    },
+    {
+        kode: 'A12',
+        nama: 'Kaos premium',
+        gambar: 'images/3.webp',
+        link: '#'
+    }
+])"
+style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
+
+    A1. Kaos polos (Plain T-Shirt)
+
+</div>
 
     <div onclick="klik('Slim Fit')" style="width:360px; margin:10px auto; padding:10px; background:#a8e6a1; border-radius:10px; cursor:pointer; color:black;">
         A2. Kaos slim fit (Slim Fit T-Shirt)
@@ -701,6 +724,11 @@
 
 </div>
 
+<!-- PAGE I selesai -->
+
+<!-- DETAIL PRODUK (WAJIB ADA DI SINI) -->
+<div id="detailBox" style="display:none; text-align:center; margin-top:20px;"></div>
+
 <!-- SCRIPT NAVIGASI -->
 <script>
 function showPage(page) {
@@ -727,8 +755,42 @@ function backHome() {
     document.getElementById("home").style.display = "block";
 }
 
-function klik(item) {
-    alert("Kamu memilih: " + item);
+function klikProduk(folder, listProduk) {
+
+    document.getElementById("home").style.display = "none";
+
+    let pages = ["A","B","C","D","E","F","G","H","I"];
+    pages.forEach(p => {
+        let el = document.getElementById("page" + p);
+        if (el) el.style.display = "none";
+    });
+
+    let detail = document.getElementById("detailBox");
+    detail.style.display = "block";
+
+    // tombol kembali + isi produk
+    let html = `
+        <div onclick="backHome()" 
+             style="width:360px;margin:10px auto;padding:10px;background:#ffcc66;text-align:center;border-radius:10px;cursor:pointer;">
+            ⬅ Kembali
+        </div>
+    `;
+
+    listProduk.forEach(item => {
+        html += `
+        <div style="width:360px;margin:10px auto;background:#fff;border-radius:10px;overflow:hidden;color:black;">
+            <img src="${item.gambar}" 
+                 onclick="if('${item.link}') window.open('${item.link}')"
+                 style="width:100%;cursor:pointer;">
+
+            <div onclick="if('${item.link}') window.open('${item.link}')"
+                 style="padding:10px;text-align:center;font-weight:bold;cursor:pointer;">
+                ${item.kode}. ${item.nama}
+            </div>
+        </div>`;
+    });
+
+    detail.innerHTML = html;
 }
 
 function searchAll() {
@@ -773,6 +835,7 @@ function searchAll() {
         }
     });
 }
+
 
 </script>
 </body>
