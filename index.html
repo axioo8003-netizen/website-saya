@@ -4,38 +4,33 @@
 <!-- body = semua isi website yang terlihat oleh user -->
 <body style="background-image: url('Background/jonatan-pie-3l3RwQdHRHg-unsplash.jpg');">
 
-<!-- h1 = judul utama website -->
-<h1 style="
-    cursor:default;
-    width:360px;
-    margin:10px auto;
-    padding:12px;
-    text-align:center;
-    color:white;
-">
+<div style="cursor:default; width:360px; margin:10px auto; padding:12px; border-radius:10px; font-weight:bold; color:White; text-align:center; font-size:50px;">
     Mau Cari Model<br>
     Baju Apa nih?
-</h1>
+</div>
 
 <!-- SEARCH FITUR = kotak pencarian untuk mencari semua item -->
 <div style="text-align:center; margin-top:15px;">
 
-    <!-- input = tempat user mengetik kata pencarian -->
+    <div style="width:360px; margin:10px auto; padding:12px; background:#ffffff; border-radius:10px; text-align:center;">
+
     <input 
-    type="text" 
-    id="searchBox" 
-    placeholder="Bapak/ibu tulis kodenya di sini yaaa..." 
-    onkeyup="searchAll()"
-    style="
-        width: 360px;
-        margin: 10px auto;
-        padding: 12px;
-        border-radius: 8px;
-        border: none;
-        outline: none;
-        text-align: center;
-    "
+        type="text"
+        id="searchBox"
+        placeholder="isi kodenya disini yaa..."
+        onkeyup="searchAll()"
+        style="
+            width:100%;
+            padding:10px;
+            border-radius:8px;
+            border:none;
+            outline:none;
+            text-align:center;
+        "
     >
+
+</div>
+
 <!-- SEARCH RESULT AREA -->
 <div id="searchResult" style="display:none; text-align:center; margin-top:20px; color:white;">
 </div>
