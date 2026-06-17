@@ -5,14 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<!-- Judul -->
     <title>Mau Cari Model Baju Apa Nih?</title>
-
-    <style>
-        body {
+<!-- CSS, tampilan, dekorasi -->
+	
+    <style> 
+		body {
             margin: 0;
             font-family: Arial, sans-serif;
 
+			/* Background */
+			
             background-image: url("Background/jonatan-pie-3l3RwQdHRHg-unsplash.jpg");
             background-size: cover;
             background-position: center;
@@ -117,21 +120,30 @@
 
     <div id="home" class="page active">
 
+		
+		<!-- Judul -->
+		
         <h1>
 Mau Cari
 Model
 Baju Apa Nih?
         </h1>
 
+		
+<!-- fitur pencarian -->
+		
         <input
     type="text"
     id="searchHome"
-    placeholder="Cari model baju..."
+    placeholder=                "Tulis disini ya guys :) ..."
     oninput="searchHome()">
         
         <div class="grid" id="homeSearchResult"></div>
-        <div class="grid">
+        <div class="grid" id="menuKategori">
 
+			
+			<!-- Tampilan Menu -->
+			
             <div class="box" onclick="openPage('kaos')">
                 A. KAOS / T-SHIRT
             </div>
@@ -172,7 +184,7 @@ Baju Apa Nih?
 
     </div>
 
-    <!-- HALAMAN KAOS -->
+    <!-- HALAMAN KAOS A -->
 
     <div id="kaos" class="page">
 
@@ -192,7 +204,7 @@ Baju Apa Nih?
 
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN POLO B -->
 
     <div id="polo" class="page">
 
@@ -205,15 +217,16 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
-
-
+<!-- HALAMAN KEMEJA C -->
+<!-- Jangan lupa ganti ini jika sudah ada data nya -->
+<!-- Samakan seperti A & B -->
+	
     <div id="kemeja" class="page">
         <h1>C. KEMEJA / SHIRT</h1>
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN HOODIE D -->
 
 
     <div id="hoodie" class="page">
@@ -221,7 +234,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN SWEATER E -->
 
 
     <div id="sweater" class="page">
@@ -229,7 +242,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN SLEEVELESS F -->
 
 
     <div id="sleeveless" class="page">
@@ -237,7 +250,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN GYM G -->
 
 
     <div id="gym" class="page">
@@ -245,7 +258,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN OUTER H -->
 
 
     <div id="outer" class="page">
@@ -253,7 +266,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN LAIN -->
+<!-- HALAMAN STREET I -->
 
 
     <div id="street" class="page">
@@ -261,6 +274,7 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
+	
 <!-- HALAMAN LAIN -->
 
 <div id="produkPage" class="page">
@@ -274,10 +288,18 @@ Baju Apa Nih?
     </button>
 
 </div>
-    
 
+	
+    
+<!-- HALAMAN SCRIPT DAN FUNGSI INI OTAK/LOGIKANYA -->
+	
 <script>
 
+/* =====================================
+   		LOGIKA OPEN PAGE
+===================================== */
+
+	
         function openPage(id) {
 
             document
@@ -289,6 +311,11 @@ Baju Apa Nih?
                 .classList.add('active');
 
         }
+	
+
+	/* =====================================
+   		LOGIKA TOMBOL KEMBALI
+===================================== */
 
         function backHome() {
 
@@ -302,6 +329,11 @@ Baju Apa Nih?
 
         }
 
+	
+/* =====================================
+DATA LIST ISI BASE NANTI UPDATE BERKALA
+===================================== */
+	
         const kaosList = [
 
             "Kaos polos (Plain T-Shirt)",
@@ -327,7 +359,7 @@ Baju Apa Nih?
 
         ];
 
-        const pololist = [
+        const poloList = [
     "Polo polos (Plain Polo Shirt)",
     "Polo slim fit (Slim Fit Polo Shirt)",
     "Polo oversize (Oversize Polo Shirt)",
@@ -343,72 +375,74 @@ Baju Apa Nih?
 ];
 
 
-        const semuaKategori = [
+/* =====================================
+HARUS UPDATE KATEGORI JUGA JANGAN LUPA
+===================================== */
+	
+	const semuaKategori = [
     ...kaosList,
-    ...pololist
+    ...poloList
 ];
 
+/* =====================================
+   		LOGIKA LOAD KATEGORI
+===================================== */
+	
+        function loadKategori(containerId, dataList) {
 
-        function loadKaos() {
+    const container =
+        document.getElementById(containerId);
 
-            const container =
-                document.getElementById("kaosContainer");
+    container.innerHTML = "";
 
-            container.innerHTML = "";
+    dataList.forEach(item => {
 
-            kaosList.forEach(item => {
+        const box =
+            document.createElement("div");
 
-                const box =
-                    document.createElement("div");
+        box.className = "box";
 
-                box.className = "box";
+        box.innerText = item;
 
-                box.innerText = item;
+        box.onclick = () => {
+            openProdukPage(item);
+        };
 
-                box.onclick = () => {
-   		 openProdukPage(item);
-			};
+        container.appendChild(box);
 
-                container.appendChild(box);
+    });
 
-            });
+	}	
 
-        }
+const kategoriData = [
 
-         function loadPolo() {
+    {
+        container: "kaosContainer",
+        data: kaosList
+    },
 
-            const container =
-                document.getElementById("poloContainer");
+    {
+        container: "poloContainer",
+        data: poloList
+    }
 
-            container.innerHTML = "";
+];
 
-            pololist.forEach(item => {
+	kategoriData.forEach(item => {
 
-                const box =
-                    document.createElement("div");
+    loadKategori(
+        item.container,
+        item.data
+    );
 
-                box.className = "box";
+});
 
-                box.innerText = item;
-
-                box.onclick = () => {
-   		 openProdukPage(item);
-					};
-
-                container.appendChild(box);
-
-            });
-
-        }
-     
-
-loadKaos();
-
-loadPolo();
-
-   
+/* =====================================
+   		LOGIKA BUKA PRODUK
+===================================== */
+	
 function openProdukPage(kategori) {
-
+    console.log (kategori);
     document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
     });
@@ -424,7 +458,13 @@ function openProdukPage(kategori) {
 
     container.innerHTML = "";
 
-    produkKaos[kategori].forEach(produk => {
+    const hasil = semuaProduk.filter(
+    produk =>
+    produk.subKategori === kategori
+);
+	console.log(hasil);
+
+hasil.forEach(produk => {
 
         const box = document.createElement("div");
 
@@ -443,18 +483,29 @@ function openProdukPage(kategori) {
     });
 }
 
-const produkKaos = {
+/* =====================================
+   		UPDATE BERKALA PRODUK
+KALAU MAU SINGKAT SUB KATEGORI IKUTIN LIST
+	DENGAN URUTAN ANGKA DIMULAI DARI 0
+KARENA JAVA SCRIPT MULAI BACA DARI ANGKA 0
+===================================== */
+	
+const semuaProduk = [
 
-            "Kaos polos (Plain T-Shirt)": [
-        {
-            nama: "A10 Kaos Polos Putih",
-            gambar:"images/e770c37f3532070736b3223f7b97c882.webp",
-            link: "https://s.shopee.co.id/7VE5MHMISG"
-        }
-    ]
-};
+    {
+        kategoriUtama: "kaos",
+        subKategori: kaosList[0],
+        nama: "A10 Kaos Polos Putih",
+        gambar: "images/e770c37f3532070736b3223f7b97c882.webp",
+        link: "https://s.shopee.co.id/7VE5MHMISG"
+    }
 
-
+];
+	
+/* =====================================
+   		LOGIKA FILTER LIST
+===================================== */
+	
 function filterList(inputId, containerId, dataList) {
 
     const keyword =
@@ -487,22 +538,64 @@ function filterList(inputId, containerId, dataList) {
 
 }
 
-
+/* =====================================
+        LOGIKA FITUR PENCARIAN
+===================================== */
+	
 function searchHome() {
-
-    const keyword =
+	
+	const keyword =
         document.getElementById("searchHome")
         .value
-        .toLowerCase();
+        .toLowerCase()
+        .trim();
 
     const container =
         document.getElementById("homeSearchResult");
 
-    container.innerHTML = "";
+	const menuKategori =
+    document.getElementById("menuKategori");
 
-    if (!keyword) return;
+	container.innerHTML = "";
 
-    const products = getAllProducts();
+	if (!keyword) {
+
+    menuKategori.style.display = "flex";
+
+    return;
+}
+
+menuKategori.style.display = "none";
+			 
+    // Cari kategori & subkategori
+
+    semuaKategori.forEach(item => {
+
+        if (
+            item.toLowerCase()
+            .includes(keyword)
+        ) {
+
+            const box =
+                document.createElement("div");
+
+            box.className = "box";
+
+            box.innerText = item;
+
+            box.onclick = () => {
+                openProdukPage(item);
+            };
+
+            container.appendChild(box);
+
+        }
+
+    });
+
+    // Cari produk
+
+    const products = semuaProduk;
 
     products.forEach(product => {
 
@@ -523,12 +616,10 @@ function searchHome() {
             `;
 
             box.onclick = () => {
-
                 window.open(
                     product.link,
                     "_blank"
                 );
-
             };
 
             container.appendChild(box);
@@ -537,27 +628,10 @@ function searchHome() {
 
     });
 
-}
+	}
 
-function getAllProducts() {
-
-    const products = [];
-
-    Object.values(produkKaos).forEach(list => {
-
-        list.forEach(product => {
-
-            products.push(product);
-
-        });
-
-    });
-
-    return products;
-
-}
+	console.log("semuaProduk:", semuaProduk);
 
  </script>
 
 </body>
-
