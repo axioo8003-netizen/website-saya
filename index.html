@@ -135,7 +135,7 @@ Baju Apa Nih?
         <input
     type="text"
     id="searchHome"
-    placeholder=                "Tulis disini ya guys :) ..."
+    placeholder=                "Tulis disini ya guys kodenya :) ..."
     oninput="searchHome()">
         
         <div class="grid" id="homeSearchResult"></div>
@@ -217,12 +217,16 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN KEMEJA C -->
-<!-- Jangan lupa ganti ini jika sudah ada data nya -->
-<!-- Samakan seperti A & B -->
-	
+<!-- HALAMAN KEMEJA C sudah update -->
+
     <div id="kemeja" class="page">
+
         <h1>C. KEMEJA / SHIRT</h1>
+
+        <input type="text" placeholder="Cari Kemeja...">
+
+        <div class="grid" id="kemejaContainer"></div>
+
         <button onclick="backHome()">Kembali</button>
     </div>
 
@@ -331,7 +335,7 @@ Baju Apa Nih?
 
 	
 /* =====================================
-DATA LIST ISI BASE NANTI UPDATE BERKALA
+ UPDATE DATA LIST ISI BASE NANTI UPDATE BERKALA
 ===================================== */
 	
         const kaosList = [
@@ -372,6 +376,30 @@ DATA LIST ISI BASE NANTI UPDATE BERKALA
     "Henley panjang (Long Sleeve Henley)",
     "Henley slim fit (Slim Henley)",
     "Henley oversize (Oversize Henley)"
+        
+       ];
+
+	const kemejaList = [
+    "Kemeja formal (Formal Shirt)",
+    "Kemeja slim fit (Slim Fit Shirt)",
+    "Kemeja regular fit (Regular Fit Shirt)",
+    "Kemeja oxford (Oxford Shirt)",
+    "Kemeja flanel (Flannel Shirt)",
+    "Kemeja denim (Denim Shirt)",
+    "Kemeja linen (Linen Shirt)",
+    "Kemeja satin formal (Satin Dress Shirt)",
+    "Kemeja tuxedo (Tuxedo Shirt)",
+    "Kemeja lengan pendek (Short Sleeve Shirt)",
+    "Kemeja motif (Pattern Shirt)",
+    "Kemeja kotak (Check Shirt)",
+    "Kemeja garis (Striped Shirt)",
+    "Kemeja camp collar (Camp Collar Shirt)",
+    "Kemeja workwear (Work Shirt)",
+    "Kemeja mandarin (Mandarin Shirt)",
+    "Kemeja overshirt ringan (Light Overshirt)",
+    "Kemeja overshirt tebal (Heavy Overshirt)",
+    "Kemeja tactical (Tactical Shirt)",
+    "Kemeja industrial (Industrial Shirt)"
 ];
 
 
@@ -381,7 +409,8 @@ HARUS UPDATE KATEGORI JUGA JANGAN LUPA
 	
 	const semuaKategori = [
     ...kaosList,
-    ...poloList
+    ...poloList,
+    ...kemejaList
 ];
 
 /* =====================================
@@ -414,6 +443,11 @@ HARUS UPDATE KATEGORI JUGA JANGAN LUPA
 
 	}	
 
+/* =====================================
+         UPDATE DATA JUGA
+===================================== */
+
+
 const kategoriData = [
 
     {
@@ -424,6 +458,10 @@ const kategoriData = [
     {
         container: "poloContainer",
         data: poloList
+    },
+    {
+	container: "kemejaContainer",
+        data: kemejaList
     }
 
 ];
@@ -442,7 +480,9 @@ const kategoriData = [
 ===================================== */
 	
 function openProdukPage(kategori) {
+
     console.log (kategori);
+
     document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
     });
@@ -458,11 +498,17 @@ function openProdukPage(kategori) {
 
     container.innerHTML = "";
 
-    const hasil = semuaProduk.filter(
+
+/* =====================================
+  const lama
+ 
+
+const hasil = semuaProduk.filter(
     produk =>
     produk.subKategori === kategori
 );
-	console.log(hasil);
+
+console.log(hasil);
 
 hasil.forEach(produk => {
 
@@ -482,6 +528,52 @@ hasil.forEach(produk => {
         container.appendChild(box);
     });
 }
+
+
+letakkan sampai update berkala
+===================================== */
+
+const hasil = semuaProduk.filter(
+        produk => produk.subKategori === kategori
+    );
+
+    console.log(hasil);
+
+    if (hasil.length > 0) {
+
+        hasil.forEach(produk => {
+
+            const box = document.createElement("div");
+
+            box.className = "box";
+
+            box.innerHTML = `
+                <img src="${produk.gambar}" width="150">
+                <h3>${produk.nama}</h3>
+            `;
+
+            box.onclick = () => {
+                window.open(produk.link, "_blank");
+            };
+
+            container.appendChild(box);
+        });
+
+    } else {
+
+        const box = document.createElement("div");
+        box.className = "box";
+
+        box.innerHTML = `
+            <img src="images/ea.png">
+            <h3>Belum ada produk di kategori ini</h3>
+        `;
+
+        container.appendChild(box);
+    }
+}
+    	
+
 
 /* =====================================
    	UPDATE BERKALA PRODUK
