@@ -919,23 +919,21 @@ document.addEventListener(
         const music =
             document.getElementById("bgMusic");
 
-        music.play();
+        music.volume = 0.10;
 
-        document.removeEventListener(
-            "click",
-            startMusic
-        );
+        music.play();
 
     },
     { once: true }
 );
 
-music.volume = 0.1; // 10%
-
 function toggleMusic(){
 
     const music =
         document.getElementById("bgMusic");
+
+music.volume = 0.0001; // 10%
+
 
     const btn =
         document.getElementById("musicBtn");
@@ -952,6 +950,7 @@ function toggleMusic(){
 
     }
 }
+
 
  </script>
 
