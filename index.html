@@ -135,7 +135,7 @@ Baju Apa Nih?
         <input
     type="text"
     id="searchHome"
-    placeholder=                "Tulis disini ya guys kodenya :) ..."
+    placeholder=                "Tulis disini ya guys kodenya, Contoh 👉🏻 A10 kaos polos"
     oninput="searchHome()">
         
         <div class="grid" id="homeSearchResult"></div>
@@ -147,6 +147,12 @@ Baju Apa Nih?
             <div class="box" onclick="openPage('kaos')">
                 A. KAOS / T-SHIRT
             </div>
+
+
+
+<!--
+
+
 
             <div class="box" onclick="openPage('polo')">
                 B. POLO & HENLEY
@@ -164,7 +170,7 @@ Baju Apa Nih?
                 E. SWEATER & RAJUT
             </div>
 
-            <div class="box" onclick="openPage('sleeveless')">
+            <div class="box" onclick="openPage('tanpalengan')">
                 F. TANPA LENGAN / SLEEVELESS
             </div>
 
@@ -172,14 +178,18 @@ Baju Apa Nih?
                 G. GYM / SPORT
             </div>
 
-            <div class="box" onclick="openPage('outer')">
+            <div class="box" onclick="openPage('outerwear')">
                 H. OUTERWEAR
             </div>
 
-            <div class="box" onclick="openPage('street')">
+            <div class="box" onclick="openPage('streetwear')">
                 I. STREETWEAR
-            </div>
+            </div>                                     
 
+
+
+												-->
+						
         </div>
 
     </div>
@@ -217,67 +227,61 @@ Baju Apa Nih?
         <button onclick="backHome()">Kembali</button>
     </div>
 
-<!-- HALAMAN KEMEJA C sudah update -->
-
-    <div id="kemeja" class="page">
-
-        <h1>C. KEMEJA / SHIRT</h1>
-
-        <input type="text" placeholder="Cari Kemeja...">
-
-        <div class="grid" id="kemejaContainer"></div>
-
-        <button onclick="backHome()">Kembali</button>
-    </div>
+<!-- HALAMAN KEMEJA C -->
+<div id="kemeja" class="page">
+    <h1>C. KEMEJA / SHIRT</h1>
+    <input type="text" placeholder="Cari Kemeja...">
+    <div class="grid" id="kemejaContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
 <!-- HALAMAN HOODIE D -->
-
-
-    <div id="hoodie" class="page">
-        <h1>D. HOODIE & SWEATSHIRT</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
+<div id="hoodie" class="page">
+    <h1>D. HOODIE & SWEATSHIRT</h1>
+    <input type="text" placeholder="Cari Hoodie...">
+    <div class="grid" id="hoodieContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
 <!-- HALAMAN SWEATER E -->
+<div id="sweater" class="page">
+    <h1>E. SWEATER & CARDIGAN</h1>
+    <input type="text" placeholder="Cari Sweater...">
+    <div class="grid" id="sweaterContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
-
-    <div id="sweater" class="page">
-        <h1>E. SWEATER & RAJUT</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
-
-<!-- HALAMAN SLEEVELESS F -->
-
-
-    <div id="sleeveless" class="page">
-        <h1>F. SLEEVELESS</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
+<!-- HALAMAN TANPA LENGAN F -->
+<div id="tanpalengan" class="page">
+    <h1>F. TANK TOP & SLEEVELESS</h1>
+    <input type="text" placeholder="Cari Tank Top...">
+    <div class="grid" id="tanpalenganContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
 <!-- HALAMAN GYM G -->
+<div id="gym" class="page">
+    <h1>G. GYM & SPORTSWEAR</h1>
+    <input type="text" placeholder="Cari Sportswear...">
+    <div class="grid" id="gymContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
+<!-- HALAMAN OUTERWEAR H -->
+<div id="outerwear" class="page">
+    <h1>H. OUTERWEAR</h1>
+    <input type="text" placeholder="Cari Outerwear...">
+    <div class="grid" id="outerwearContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 
-    <div id="gym" class="page">
-        <h1>G. GYM / SPORT</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
-
-<!-- HALAMAN OUTER H -->
-
-
-    <div id="outer" class="page">
-        <h1>H. OUTERWEAR</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
-
-<!-- HALAMAN STREET I -->
-
-
-    <div id="street" class="page">
-        <h1>I. STREETWEAR</h1>
-        <button onclick="backHome()">Kembali</button>
-    </div>
-
+<!-- HALAMAN STREETWEAR I -->
+<div id="streetwear" class="page">
+    <h1>I. STREETWEAR & FASHION TOPS</h1>
+    <input type="text" placeholder="Cari Streetwear...">
+    <div class="grid" id="streetwearContainer"></div>
+    <button onclick="backHome()">Kembali</button>
+</div>
 	
 <!-- HALAMAN LAIN -->
 
@@ -400,17 +404,124 @@ Baju Apa Nih?
     "Kemeja overshirt tebal (Heavy Overshirt)",
     "Kemeja tactical (Tactical Shirt)",
     "Kemeja industrial (Industrial Shirt)"
-];
+        
+	];
 
+
+	const hoodieList = [
+    "Hoodie pullover (Pullover Hoodie)",
+    "Hoodie zipper (Zip Hoodie)",
+    "Hoodie oversize (Oversize Hoodie)",
+    "Hoodie slim fit (Slim Hoodie)",
+    "Hoodie cropped (Cropped Hoodie)",
+    "Hoodie streetwear (Street Hoodie)",
+    "Hoodie tanpa lengan (Sleeveless Hoodie)",
+    "Sweatshirt crewneck (Crewneck Sweatshirt)",
+    "Sweatshirt oversize (Oversize Sweatshirt)",
+    "Sweatshirt grafis (Graphic Sweatshirt)",
+    "Sweatshirt half zip (Half Zip Sweatshirt)",
+    "Sweatshirt ringan (Light Sweatshirt)"
+
+	];
+
+
+	const sweaterList = [
+    "Sweater crewneck (Crewneck Sweater)",
+    "Sweater v-neck (V-Neck Sweater)",
+    "Sweater turtleneck (Turtleneck Sweater)",
+    "Sweater rajut kabel (Cable Knit Sweater)",
+    "Sweater rajut tipis (Light Knit Sweater)",
+    "Sweater oversize (Oversize Sweater)",
+    "Cardigan kancing (Button Cardigan)",
+    "Cardigan zipper (Zip Cardigan)",
+    "Cardigan panjang (Long Cardigan)",
+    "Polo rajut (Knitted Polo)",
+    "Sweater vest (Knit Vest Top)"
+
+	];
+
+	const tanpalenganList = [
+    "Kaos tanpa lengan (Sleeveless T-Shirt)",
+    "Tank top polos (Plain Tank Top)",
+    "Tank top gym (Gym Tank Top)",
+    "Tank top rib (Ribbed Tank Top)",
+    "Tank top longline (Longline Tank Top)",
+    "Kaos gym singlet (Gym Singlet)",
+    "Kaos gym stringer (Gym Stringer)",
+    "Kaos gym racerback (Racerback Tank)",
+    "Muscle shirt (Muscle Shirt)",
+    "Tank top streetwear (Street Tank Top)"
+	
+	];
+
+	const gymList = [
+    "Kaos gym dry-fit (Gym Dry-Fit Shirt)",
+    "Kaos gym kompresi (Gym Compression Shirt)",
+    "Kaos gym seamless (Seamless Gym Shirt)",
+    "Kaos gym breathable (Breathable Gym Shirt)",
+    "Kaos gym mesh (Mesh Gym Performance Shirt)",
+    "Kaos gym training (Gym Training Shirt)",
+    "Kaos gym lengan panjang (Long Sleeve Gym Shirt)",
+    "Base layer gym (Gym Base Layer Top)",
+    "Compression long sleeve pro (Pro Compression Top)",
+    "Atasan running (Running Top)",
+    "Jersey olahraga (Sport Jersey)",
+    "Jersey sepak bola (Football Jersey)",
+    "Jersey basket (Basketball Jersey)",
+    "Jersey sepeda (Cycling Jersey)",
+    "Polo sport performance (Performance Polo)"
+	
+	];
+
+	const outerwearList = [
+    "Jaket bomber (Bomber Jacket)",
+    "Jaket denim (Denim Jacket)",
+    "Jaket varsity (Varsity Jacket)",
+    "Jaket coach (Coach Jacket)",
+    "Jaket windbreaker (Windbreaker Jacket)",
+    "Jaket shacket (Shirt Jacket)",
+    "Jaket lapangan (Field Jacket)",
+    "Jaket kerja (Work Jacket)",
+    "Jaket harrington (Harrington Jacket)",
+    "Jaket utilitas (Utility Jacket)",
+    "Jaket streetwear (Street Jacket)",
+    "Vest outdoor (Outdoor Vest)",
+    "Vest utilitas (Utility Vest)",
+    "Gilet techwear (Techwear Gilet)"
+
+	];
+
+	const streetwearList = [
+    "Kaos boxy cropped (Boxy Cropped Tee)",
+    "Kaos sheer (Sheer T-Shirt)",
+    "Kaos techwear (Techwear T-Shirt)",
+    "Kaos avant-garde (Avant-Garde Tee)",
+    "Atasan kimono pria (Kimono Top)",
+    "Atasan tunik pria (Men Tunic Top)",
+    "Kaftan modern pria (Modern Kaftan)",
+    "Blazer casual (Casual Blazer)",
+    "Blazer formal (Formal Blazer)",
+    "Rompi formal (Formal Vest)",
+    "Rompi rajut (Knit Vest)",
+    "Atasan deconstructed (Deconstructed Top)",
+    "Atasan layered fashion (Layered Fashion Top)"
+
+	];
 
 /* =====================================
 HARUS UPDATE KATEGORI JUGA JANGAN LUPA
 ===================================== */
-	
+
 	const semuaKategori = [
     ...kaosList,
     ...poloList,
-    ...kemejaList
+    ...kemejaList,
+    ...hoodieList,
+    ...sweaterList,
+    ...tanpalenganList,
+    ...gymList,
+    ...outerwearList,
+    ...streetwearList
 ];
 
 /* =====================================
@@ -449,21 +560,42 @@ HARUS UPDATE KATEGORI JUGA JANGAN LUPA
 
 
 const kategoriData = [
-
     {
         container: "kaosContainer",
         data: kaosList
     },
-
     {
         container: "poloContainer",
         data: poloList
     },
     {
-	container: "kemejaContainer",
+        container: "kemejaContainer",
         data: kemejaList
+    },
+    {
+        container: "hoodieContainer",
+        data: hoodieList
+    },
+    {
+        container: "sweaterContainer",
+        data: sweaterList
+    },
+    {
+        container: "tanpalenganContainer",
+        data: tanpalenganList
+    },
+    {
+        container: "gymContainer",
+        data: gymList
+    },
+    {
+        container: "outerwearContainer",
+        data: outerwearList
+    },
+    {
+        container: "streetwearContainer",
+        data: streetwearList
     }
-
 ];
 
 	kategoriData.forEach(item => {
