@@ -7,9 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Judul -->
     <title>Mau Cari Model Baju Apa Nih?</title>
+
+
 <!-- CSS, tampilan, dekorasi -->
 	
     <style> 
+		
+	#musicBtn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    border: none;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    z-index: 9999;
+}
+
+
 		body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -909,6 +930,29 @@ document.addEventListener(
     { once: true }
 );
 
+music.volume = 0.1; // 10%
+
+function toggleMusic(){
+
+    const music =
+        document.getElementById("bgMusic");
+
+    const btn =
+        document.getElementById("musicBtn");
+
+    if(music.paused){
+
+        music.play();
+        btn.innerHTML = "🔊";
+
+    }else{
+
+        music.pause();
+        btn.innerHTML = "🔇";
+
+    }
+}
+
  </script>
 
 <!-- LOGIKA MUSIK -->
@@ -916,6 +960,10 @@ document.addEventListener(
 <audio id="bgMusic" loop>
     <source src="audio/orchestra.mp3" type="audio/mpeg">
 </audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    🔊
+</button>
 
 </body>
 </html>
